@@ -1,0 +1,50 @@
+.mainhome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+.mainhome h1 {
+  font-size: 100px;
+  margin: 0px;
+}
+
+.mainhome p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  display: flex;
+  width: 50vw;
+}
+
+.buttons button {
+  padding: 0.5rem 1rem;
+  width: 23vw;
+  font-size: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  margin-left: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.buttons button:hover {
+  background-color: #6dce70;
+  transform: translateX(1px);
+  animation: 500ms;
+}
+
+.instruction-div {
+  text-align: left;
+  align-self: flex-start;
+  margin: 20px;
+
+}
+
+.instruction-ul {
+  list-style: none;
+}
