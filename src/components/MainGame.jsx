@@ -2,6 +2,20 @@ import React, { useState, useEffect } from 'react'
 import '../assets/MainGame.css'
 
 const MainGame = () => {
+
+  const wordList = [
+    "apple", "brave", "crane", "daisy", "eagle", "fancy", "glide", "haste",
+    "irony", "jolly", "knock", "lucky", "mango", "noble", "ocean", "piano",
+    "quiet", "risky", "sunny", "table", "under", "vivid", "witty", "xenon",
+    "youth", "zebra", "angle", "blush", "candy", "drift", "elite", "frost",
+    "grape", "honey", "input", "jelly", "karma", "lemon", "mirth", "nudge",
+    "orbit", "plant", "quack", "rider", "shiny", "thick", "unity", "vapor",
+    "whale", "zesty", "alert", "bloom", "charm", "dwell", "eager", "flame",
+    "glory", "hatch", "ideal", "jewel", "knack", "latch", "mirth", "noble",
+    "olive", "pouch", "quest", "ridge", "light", "tiger", "ultra", "vivid",
+    "waste", "xylem", "yield", "zesty", "amber", "baker", "cider", "dough",
+  ];
+
   const [typedLetters, setTypedLetters] = useState([]);
   const [currentWord, setCurrectWord] = useState("");
   const [currentRow, setCurrentRow] = useState(1);
@@ -11,13 +25,12 @@ const MainGame = () => {
   const [disableAll, setDisableAll] = useState(false);
   const [greenKey, setGreenKey] = useState([]);
   const [yellowKey, setYellowKey] = useState([]);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     async function startingGame() {
-      const start = await fetch("http://localhost:8080/api/start")
-      const result = await start.json();
-      console.log(result);
-      setCurrectWord(result.word);
+      const result = wordList[Math.floor(Math.random() * wordList.length)];
+      setCurrectWord(result);
     }
     startingGame()
   }, [])
@@ -38,11 +51,11 @@ const MainGame = () => {
       } else {
         setWords((prevWords) => [...prevWords, typedLetters.join('')]);
         setTypedLetters([]);
-        setCurrentRow((prevRow) => prevRow + 1)
-        const checked = await checkGuess(word, currentWord);
-        const checkedStr = checked.result;
-        if (checked.result == "Correct Guess") {
+        setCurrentRow((prevRow) => prevRow + 1);
+        const checked = await checkword(word, currentWord);
+        if (checked == "Correct word") {
           setMessage("You Won The game");
+          setScore((prevScore) => prevScore + 1);
           for (let i = 0; i < 5; i++) {
             const box = document.querySelector(`.row-${currentRow - 1} .box-${i}`);
 
@@ -59,10 +72,10 @@ const MainGame = () => {
           }
         } else {
           if ((currentRow) == 5) {
-          setMessage("You Lost")
-          setDisableAll(true);
-        }
-        
+            setMessage("You Lost")
+            setDisableAll(true);
+          }
+
           for (let i = 0; i < 5; i++) {
             const letter = word[i].toLowerCase();
             const box = document.querySelector(`.row-${currentRow - 1} .box-${i}`);
@@ -72,13 +85,13 @@ const MainGame = () => {
               continue;
             }
 
-            if (checkedStr[i] === letter) {
+            if (checked[i] === letter) {
 
               box.style.backgroundColor = '#6aaa64';
               box.style.pointerEvents = 'none';
               setGreenKey((prevValues) => [...prevValues, word[i]])
 
-            } else if (checkedStr[i] === "?") {
+            } else if (checked[i] === "?") {
               box.style.backgroundColor = '#c9b458';
               box.style.pointerEvents = 'none';
               setYellowKey((prevValues) => [...prevValues, word[i]])
@@ -101,44 +114,66 @@ const MainGame = () => {
   }
 
   const newGameClick = () => {
+    let num = 2;
+    while (currentRow - num >= 0) {
+      for (let i = 0; i < 5; i++) {
+        const box = document.querySelector(`.row-${currentRow - num} .box-${i}`);
+
+        if (!box) {
+          console.error(`Could not find box at row ${currentRow - num}, position ${i}`);
+          continue;
+        }
+        box.style.backgroundColor = 'black';
+      }
+      num += 1;
+    }
+
     setTypedLetters([]);
-    setCurrectWord("");
     setCurrentRow(1);
     setWords([]);
     setMessage("");
     setDisableKey([]);
     setDisableAll(false);
-
-    window.location.reload();
+    setGreenKey([]);
+    setYellowKey([]);
+    const result = wordList[Math.floor(Math.random() * wordList.length)];
+    setCurrectWord(result);
   }
 
   const line1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
   const line2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
   const line3 = ["Z", "X", "C", "V", "B", "N", "M"]
 
-  async function checkGuess(word, currentWord) {
+  async function checkword(word, currentWord) {
     try {
-      const response = await fetch('http://localhost:8080/api/checkGuess', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          guess: word,
-          targetWord: currentWord
-        })
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || `Server error: ${response.status}`);
+      if (word == null || currentWord == null || word.length != currentWord.length) {
+        return "Invalid word";
       }
-      return data;
+      word = word.toLowerCase();
+      currentWord = currentWord.toLowerCase();
+      if (word === currentWord) {
+        return "Correct word";
+      } else {
+        let result = "";
 
+        for (let i = 0; i < word.length; i++) {
+          let c = word.charAt(i);
+
+          if (currentWord.charAt(i) === c) {
+            result += c;
+          } else if (currentWord.includes(c)) {
+            result += "?";
+          } else {
+            result += "_";
+          }
+        }
+
+        return result.trim();
+
+      }
     } catch (error) {
-      console.error('Error during fetch:', error);
-      throw new Error('Failed to check guess. Please try again.');
+      console.error('Error during Process:', error);
+      throw new Error('Failed to check word. Please try again.');
     }
 
 
@@ -151,7 +186,7 @@ const MainGame = () => {
           <h1>Wordle Game </h1>
         </div>
         <div>
-          <p>Guess the 5-letter word in 5 tries!</p>
+          <p>word the 5-letter word in 5 tries!</p>
           <p>🟩 = Correct letter and position</p>
           <p>🟨 = Correct letter, wrong position</p>
           <p>⬜ = Letter not in word</p>
@@ -206,8 +241,8 @@ const MainGame = () => {
             <div
               key={key}
               className={`key ${disableAll || disableKey.includes(key.toUpperCase()) ? 'disabled-key' : ''} ${greenKey.includes(key.toUpperCase()) ? 'green-key' : ''} ${yellowKey.includes(key.toUpperCase()) ? 'yellow-key' : ''}`}
-              onClick={() => {              
-                  handleKeyClick(key)
+              onClick={() => {
+                handleKeyClick(key)
               }}
               style={{
                 opacity: disableAll || disableKey.includes(key.toUpperCase()) ? 0.5 : 1,
@@ -223,8 +258,8 @@ const MainGame = () => {
             <div
               key={key}
               className={`key ${disableAll || disableKey.includes(key.toUpperCase()) ? 'disabled-key' : ''} ${greenKey.includes(key.toUpperCase()) ? 'green-key' : ''} ${yellowKey.includes(key.toUpperCase()) ? 'yellow-key' : ''}`}
-              onClick={() => { 
-                  handleKeyClick(key)
+              onClick={() => {
+                handleKeyClick(key)
               }}
               style={{
                 opacity: disableAll || disableKey.includes(key.toUpperCase()) ? 0.5 : 1,
@@ -245,9 +280,9 @@ const MainGame = () => {
             <div
               key={key}
               aria-disabled={disableAll}
-             className={`key ${disableAll || disableKey.includes(key.toUpperCase()) ? 'disabled-key' : ''} ${greenKey.includes(key.toUpperCase()) ? 'green-key' : ''} ${yellowKey.includes(key.toUpperCase()) ? 'yellow-key' : ''}`}
-              onClick={() => {              
-                  handleKeyClick(key)
+              className={`key ${disableAll || disableKey.includes(key.toUpperCase()) ? 'disabled-key' : ''} ${greenKey.includes(key.toUpperCase()) ? 'green-key' : ''} ${yellowKey.includes(key.toUpperCase()) ? 'yellow-key' : ''}`}
+              onClick={() => {
+                handleKeyClick(key)
               }}
               style={{
                 opacity: disableAll || disableKey.includes(key.toUpperCase()) ? 0.5 : 1,
@@ -264,7 +299,8 @@ const MainGame = () => {
         </div>
 
         <h1>{message}</h1>
-        <p>Attempts Remaining: {5-(currentRow-1)}</p>
+        <p>Attempts Remaining: {5 - (currentRow - 1)}</p>
+        <p className='p-score'>Score: {score}</p>
 
 
         <button className='btn-new-game' onClick={newGameClick}>New Game</button>

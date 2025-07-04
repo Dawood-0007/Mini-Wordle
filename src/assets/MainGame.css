@@ -113,3 +113,11 @@
 .yellow-key {
     background-color: #c9b458;
 }
+
+.p-score {
+    color: #ffffff;
+    font-size: 20px;
+    margin-top: 10px;
+    font-family: monospace;
+    text-align: center;
+}
