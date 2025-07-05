@@ -40,6 +40,7 @@
 
 .instruction-div {
   text-align: left;
+  font-size: x-large;
   align-self: flex-start;
   margin: 20px;
 
@@ -47,4 +48,5 @@
 
 .instruction-ul {
   list-style: none;
+  font-size: medium;
 }
