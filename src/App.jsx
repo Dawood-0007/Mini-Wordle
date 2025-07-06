@@ -10,13 +10,14 @@ function App() {
     <>
       <div className='mainhome'>
         <h1>A Wordle Game</h1>
-        <p>Guess the word in 5 tries.</p>
+        <h3>Mini Wordle</h3>
+        <p>Guess the word in five tries.</p>
         <div className='buttons'>
           <NavLink to="/learn">
             <button onClick={scrollToBottom}>Learn to Play</button>
           </NavLink>
           <NavLink to="/game">
-            <button>Play</button>
+            <button>Play Now</button>
           </NavLink>
         </div>
         </div>

@@ -12,7 +12,7 @@ const Learn = () => {
           <ul className='instruction=ul'>
             <li>🟩 Green: Correct letter in the correct position</li>
             <li>🟨 Yellow: Correct letter in the wrong position</li>
-            <li>⬜ Gray: Letter not in the word</li>
+            <li>⬛ Gray: Letter not in the word</li>
           </ul>
           <p>You have 5 attempts to guess the word!</p>
         </div>

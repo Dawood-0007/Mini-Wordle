@@ -186,10 +186,10 @@ const MainGame = () => {
           <h1>Wordle Game </h1>
         </div>
         <div>
-          <p>word the 5-letter word in 5 tries!</p>
+          <p>Guess the 5-letter word in 5 tries!</p>
           <p>🟩 = Correct letter and position</p>
           <p>🟨 = Correct letter, wrong position</p>
-          <p>⬜ = Letter not in word</p>
+          <p>⬛ = Letter not in word</p>
         </div>
 
       </div>
