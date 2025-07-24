@@ -4,9 +4,21 @@ A mini wordle game in which a user has to guess a word in five attempts and diff
 
 ## Future Enhancement
 
-A Future e4nhancement will be made on time to make it a real world product.
+A Future enhancement will be made on time to make it a real world product.
 
-Try game by fork it run npm i and then npm run dev to start server on localhost.
+## How to setUp  
+
+Try game by cloning the code and then run  
+`npm install`  
+and then run  
+`npm run dev`  
+to start server on localhost.
+
 Make sure nodejs is installed.
 
-## Thank You
+
+## Your Contribution  
+  
+Your Contibution can help us in making this game alot better than before.
+Feel Free to contribute!  
+
