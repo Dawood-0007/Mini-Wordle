@@ -4,11 +4,11 @@ A mini wordle game in which a user has to guess a word in five attempts and diff
 
 ## Future Enhancement
 
-A Future enhancement will be made on time to make it a real world product.
+A Future enhancement will be made with time to make it a real world product.
 
 ## How to setUp  
 
-Try game by cloning the code and then run  
+Try game by fork or cloning the code and then run  
 `npm install`  
 and then run  
 `npm run dev`  

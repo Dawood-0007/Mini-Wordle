@@ -6,7 +6,7 @@ const Learn = () => {
     <div>
         <div className='instruction-div'>
           <h1>How To Play</h1>
-          <p>Start by typing a 5-letter word.</p>
+          <p>Start by typing a word.</p>
           <p>Press Enter to submit your guess.</p>
           <p>The color of the tiles will change to show how close your guess was:</p>
           <ul className='instruction=ul'>
