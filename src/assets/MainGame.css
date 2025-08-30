@@ -136,3 +136,30 @@
     margin: 10px 0px;  
     gap: 50px;
 }
+
+@media screen and (max-width: 768px) {
+    .key {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .bottom-row .key:first-child {
+        width: 60px;
+    }
+
+    .bottom-row .key:last-child {
+        font-size: 16px;
+    }
+
+    .game-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Difficulty from './difficulty';
+import Difficulty from './Difficulty';
 import '../assets/MainGame.css'
 
 const MainGame = () => {
@@ -336,7 +336,7 @@ const MainGame = () => {
           ))}
         </div>
 
-        <div className="row bottom-row  typing-row">
+        <div className="row bottom-row typing-row">
           <div className={`key ${disableAll || disableKey.includes('enter') ? 'disabled-key' : ''}`} onClick={() => {
             if (!disableAll && !disableKey.includes('enter')) {
               handleEnterKey('enter')

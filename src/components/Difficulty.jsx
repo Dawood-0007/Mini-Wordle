@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import styles from '../assets/Difficulty.module.css';
 
 export default function Difficulty({ onSelect }) {
   const levels = ['Easy', 'Medium', 'Hard'];
@@ -8,59 +9,20 @@ export default function Difficulty({ onSelect }) {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.title}>Choose Difficulty</div>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+    <div className={styles.container}>
+      <div className={styles.title}>Choose Difficulty</div>
+      <div className={styles.levels}>
         {levels.map((level, index) => (
           <React.Fragment key={index}>
             <div
               onClick={() => handleClick(index)}
-              style={{
-                ...styles.circle,
-                backgroundColor: 'white',
-              }}
+              className={styles.circle}
               title={level}
-            ><span style={styles.span}>{level}</span></div>
-            {index < levels.length - 1 && <div style={styles.line}></div>}
+            ><span className={styles.text}>{level}</span></div>
+            {index < levels.length - 1 && <div className={styles.line}></div>}
           </React.Fragment>
         ))}
       </div>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '40vw',
-    height: '97vh',
-    marginTop: 40,
-    flexDirection: 'column',
-    margin: 'auto auto'
-  },
-  title: {
-    fontSize: 34,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  circle: {
-    width: 40,
-    height: 40,
-    borderRadius: '50%',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-  },
-  span: {
-    color: 'white',
-    textAlign: 'center',
-    lineHeight: '120px',
-    marginLeft: 3,
-  },
-  line: {
-    width: 60,
-    height: 4,
-    backgroundColor: 'white',
-  },
-};
