@@ -59,6 +59,7 @@
     font-family: monospace;
     color: #ffffff;
     text-align: center;
+    border-radius: 10px;
     margin-top: 5px;
     border: #ffffff 1px solid  !important;
     padding: 10px;
@@ -123,6 +124,11 @@
     margin-top: 10px;
     font-family: monospace;
     text-align: center;
+    margin-bottom: 0px;
+}
+
+.prevScore {
+    margin-top: 5px;
 }
 
 .hidden {
