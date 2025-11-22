@@ -11,7 +11,7 @@ const MainGame = () => {
     "wander", "yellow", "zipper", "breach", "circle", "candle", "evolve", "freeze",
     "glance", "humble", "island", "juggle", "laptop", "mantle", "narrow", "orange",
     "pepper", "quaint", "repair", "scribe", "travel", "update", "valley", "wealth",
-    "xenial", "yearly"
+    "xenial", "yearly", "essay", "later", "bravo"
   ];
 
   const mediumwordList = [
