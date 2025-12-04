@@ -49,6 +49,7 @@ const MainGame = () => {
   const [previousScore, setPreviousScore] = useState(0);
   const [difficultyHidden, setDifficultyHidden] = useState(true);
   const [difficulty, setDifficulty] = useState('');
+  const [showHint, setShowHint] = useState(true);
 
   useEffect(() => {
     async function startingGame() {
@@ -187,6 +188,7 @@ const MainGame = () => {
     setDisableAll(false);
     setGreenKey([]);
     setYellowKey([]);
+    setShowHint(true);
 
     const wordList = difficulty === "Easy" ? easywordList : difficulty === "Medium" ? mediumwordList : hardwordList;
     const result = wordList[Math.floor(Math.random() * wordList.length)];
@@ -231,7 +233,7 @@ const MainGame = () => {
   }
 
   const resetDifficulty = () => {
-    let num = 2;
+    let num = 1;
     while (currentRow - num >= 0) {
       for (let i = 0; i < totalLetters; i++) {
         const box = document.querySelector(`.row-${currentRow - num} .box-${i}`);
@@ -257,7 +259,23 @@ const MainGame = () => {
     setTotalLetters(0);
     setDifficulty("")
     setScore(0);
+    setShowHint(true);
     setDifficultyHidden(true);
+  }
+
+  const getHint = () => {
+    const firstLetter = currentWord.slice(0,1).toUpperCase();
+    if (disableAll) {
+      return;
+    }
+    if (typedLetters.length < totalLetters) {
+      setTypedLetters((prevValues) => [firstLetter, ...prevValues])
+    }
+    setGreenKey((prev) => [...prev, firstLetter]);
+    const box = document.querySelector(".row-0 .box-0");
+    box.style.backgroundColor = "#6aaa64";
+    setShowHint(false)
+
   }
 
   return (
@@ -392,6 +410,14 @@ const MainGame = () => {
           <div className='btn-container'>
             <button className='btn-new-game' onClick={newGameClick}>New Game</button>
             <button className='btn-new-game' onClick={resetDifficulty}>Reset Difficulty</button>
+            <button className={`btn-new-game`}
+            style={{
+                  opacity: !showHint ? 0.3 : 1,
+                }}
+            onClick={() => {
+              if (showHint) getHint() 
+                else return
+            }}>Hint</button>
           </div>
         </div>
       </div>
