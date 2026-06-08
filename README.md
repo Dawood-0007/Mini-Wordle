@@ -9,9 +9,13 @@ A Future enhancement will be made with time to make it a real world product.
 ## How to setUp  
 
 Try game by fork or cloning the code and then run  
-`npm install`  
+
+`npm install` 
+
 and then run  
+
 `npm run dev`  
+
 to start server on localhost.
 
 Make sure nodejs is installed.
