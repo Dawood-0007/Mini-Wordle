@@ -32,7 +32,8 @@ const MainGame = () => {
     "love", "moon", "note", "open", "play", "quiz", "rain", "sand", "time", "user",
     "view", "wind", "zone", "bake", "clap", "dive", "echo", "frog", "glow", "hill",
     "idea", "joke", "kite", "lava", "milk", "nest", "oval", "pink", "quit", "rope",
-    "snow", "talk", "unit", "vast", "wave", "xray", "yarn", "zero", "zinc", "wolf"
+    "snow", "talk", "unit", "vast", "wave", "xray", "yarn", "zero", "zinc", "wolf",
+    "nice"
   ];
 
   const [typedLetters, setTypedLetters] = useState([]);

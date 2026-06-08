@@ -14,7 +14,7 @@ function App() {
         <p>Guess the word in five tries.</p>
         <div className='buttons'>
           <NavLink to="/learn">
-            <button onClick={scrollToBottom}>Learn to Play</button>
+            <button onClick={scrollToBottom}>See how to Play</button>
           </NavLink>
           <NavLink to="/game">
             <button>Play Now</button>
