@@ -1,5 +1,5 @@
 import './App.css'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function App() {
    function scrollToBottom() {
@@ -13,12 +13,12 @@ function App() {
         <h3>Mini Wordle</h3>
         <p>Guess the word in five tries.</p>
         <div className='buttons'>
-          <NavLink to="/learn">
+          <Link to="/learn">
             <button onClick={scrollToBottom}>See how to Play</button>
-          </NavLink>
-          <NavLink to="/game">
+          </Link>
+          <Link to="/game">
             <button>Play Now</button>
-          </NavLink>
+          </Link>
         </div>
         </div>
       
