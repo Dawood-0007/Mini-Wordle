@@ -1,5 +1,6 @@
 import './App.css'
 import { Link } from 'react-router-dom'
+import { IoGameControllerSharp } from "react-icons/io5";
 
 function App() {
    function scrollToBottom() {
@@ -17,7 +18,7 @@ function App() {
             <button onClick={scrollToBottom}>See how to Play</button>
           </Link>
           <Link to="/game">
-            <button>Play Now</button>
+            <button> <IoGameControllerSharp style={{ marginRight: "10px"}}/> Play Now</button>
           </Link>
         </div>
         </div>
